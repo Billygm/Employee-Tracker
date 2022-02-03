@@ -1,5 +1,5 @@
 INSERT INTO
-  department (id, name)
+  departments (id, name)
 VALUES
   (1, 'Sales'),
   (2, 'Finance'),
@@ -19,11 +19,11 @@ VALUES
 INSERT INTO
   employees (id, first_name, last_name, role_id, manager_id)
 VALUES
-  (1, 'Turkey', 'Wild', 1),
-  (2, 'Spokesperson', 'Pinky', 3),
-  (3, 'Grus', 'Mythic', 4),
-  (4, 'Genus', 'Mustela', 2),
+  (1, 'Turkey', 'Wild', 1, NULL),
+  (2, 'Spokesperson', 'Pinky', 2, NULL),
+  (3, 'Grus', 'Mythic', 3, NULL),
+  (4, 'Lazy-assed', 'Mastermind', 4, NULL),
   (5, 'Gentleman', 'Mercinary', 6, 3),
-  (6, 'Lazy-assed', 'Mastermind', 5, 4),
+  (6, 'Shriekin', 'Professional', 5, 4),
   (7, 'Tha', 'Destroyah', 7, 2),
   (8, 'Annoyin', 'Dominator', 8, 1);
