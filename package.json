@@ -18,7 +18,6 @@
   },
   "homepage": "https://github.com/Billygm/Employee-Tracker-SQL#readme",
   "dependencies": {
-    "express": "^4.17.2",
     "inquirer": "^8.2.0",
     "mysql2": "^2.3.3"
   }

@@ -1,13 +1,6 @@
-// const express = require('express');
 const mysql = require("mysql2");
 const inquirer = require("inquirer");
 const db = require("./db/connection");
-
-// const PORT = process.env.PORT || 3001;
-// const app = express();
-
-// app.use(express.urlencoded({ extended: false }));
-// app.use(express.json());
 
 async function presentOptions() {
   const answer = await inquirer.prompt([
@@ -89,7 +82,7 @@ async function addRole() {
     },
   ];
 
-  const choices = department.map((department) => {
+  const choices = departments.map((department) => {
     return {
       name: department.name,
       value: department.id,
@@ -101,20 +94,11 @@ async function addRole() {
       type: "list",
       name: "department_id",
       message: "choose a department",
-      choices: [
-        { name: "Sales", value: 1 },
-        { name: "Finance", value: 2 },
-        { name: "Engineering", value: 3 },
-        { name: "Leagal", value: 4 },
-      ],
+      choices: choices,
     },
   ]);
 }
 
-async function updateEmployeeRole(){}
+async function updateEmployeeRole() {}
 
 presentOptions();
-
-// app.listen(PORT, () => {
-//     console.log(`Server running on port ${PORT}`);
-//   });
