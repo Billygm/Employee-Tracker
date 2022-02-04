@@ -1,29 +1,37 @@
 INSERT INTO
-  departments (id, name)
+  departments (name)
 VALUES
-  (1, 'Sales'),
-  (2, 'Finance'),
-  (3, 'Engineering'),
-  (4, 'Leagal');
+  ('Sales'),
+  ('Finance'),
+  ('Engineering'),
+  ('Leagal');
 INSERT INTO
-  roles (id, title, salary, department_id)
+  roles (title, salary, department_id)
 VALUES
-  (1, 'Sales Lead', 100000, 1),
-  (2, 'Account Manager', 150000, 2),
-  (3, 'Lead Engineer', 145000, 3),
-  (4, 'Lead Criminal', 500000, 4),
-  (5, 'Minor Thief', 50000, 4),
-  (6, 'Software Engineer', 110000, 3),
-  (7, 'Accountant', 115000, 2),
-  (8, 'Salesperson', 80000, 1);
+  ('Sales Lead', 100000, 1),
+  ('Account Manager', 150000, 2),
+  ('Lead Engineer', 145000, 3),
+  ('Lead Criminal', 500000, 4),
+  ('Minor Thief', 50000, 4),
+  ('Software Engineer', 110000, 3),
+  ('Accountant', 115000, 2),
+  ('Salesperson', 80000, 1);
 INSERT INTO
-  employees (id, first_name, last_name, role_id, manager_id)
+  employees (first_name, last_name, role_id, manager_id)
 VALUES
-  (1, 'Turkey', 'Wild', 1, NULL),
-  (2, 'Spokesperson', 'Pinky', 2, NULL),
-  (3, 'Grus', 'Mythic', 3, NULL),
-  (4, 'Lazy-assed', 'Mastermind', 4, NULL),
-  (5, 'Gentleman', 'Mercinary', 6, 3),
-  (6, 'Shriekin', 'Professional', 5, 4),
-  (7, 'Tha', 'Destroyah', 7, 2),
-  (8, 'Annoyin', 'Dominator', 8, 1);
+  ('Turkey', 'Wild', 1, NULL),
+  ('Spokesperson', 'Pinky', 2, NULL),
+  ('Grus', 'Mythic', 3, NULL),
+  ('Lazy-assed', 'Mastermind', 4, NULL),
+  ('Gentleman', 'Mercinary', 6, 3),
+  ('Shriekin', 'Professional', 5, 4),
+  ('Tha', 'Destroyah', 7, 2),
+  ('Annoyin', 'Dominator', 8, 1);
+
+
+
+
+
+
+
+  

@@ -45,7 +45,7 @@ async function viewAllDepartments() {
 }
 
 async function viewAllRoles() {
-  const roles = await db.query("SELECT * FROM roles");
+  const roles = await db.query("SELECT roles.id AS ID, roles.title AS Job_Title, departments.name AS Department, roles.salary AS Salary FROM roles JOIN departments ON roles.department_id = departments.id");
 
   console.table(roles);
   presentOptions();
@@ -60,28 +60,60 @@ async function viewAllEmployees() {
 
 async function addDepartment() {}
 
-async function addEmployee() {}
+async function addEmployee() {
+
+  const roles = await db.query("SELECT * FROM roles");
+  
+  const employees = await db.query("SELECT * FROM employees");
+  
+const roleChoices = roles.map((role) => {
+  return {
+    name: role.title,
+    value: role.id,
+  };
+});
+const supervisorChoices = employees.map((employees) => {
+  return {
+    name: employees.name,
+    value: employees.id,
+  };
+});
+
+const answers = await inquirer.prompt([
+  {
+    type: "list",
+    name: "role_id",
+    message: "Choose a role",
+    choices: roleChoices,
+  },
+  {
+    type: "input",
+    name: "fist_name",
+    message: "What is the employees first name?",
+  },
+  {
+    type: "input",
+    name: "last_name",
+    message: "What is the employees last name?",
+  },
+  {
+    type: "list",
+    name: "manager",
+    message: "Who is this employees manager?",
+    choices: supervisorChoices,
+  }
+]);
+
+await db.query("INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES (?,?,?,?)", [answers.fist_name, answers.last_name, answers.role_id, answers.manager])
+
+  presentOptions();
+
+}
 
 async function addRole() {
-  const departments = [
-    {
-      id: 1,
-      name: "Sales",
-    },
-    {
-      id: 2,
-      name: "Finance",
-    },
-    {
-      id: 3,
-      name: "Engineering",
-    },
-    {
-      id: 4,
-      name: "Leagal",
-    },
-  ];
-
+  
+  const departments = await db.query("SELECT * FROM departments");
+  
   const choices = departments.map((department) => {
     return {
       name: department.name,
@@ -93,10 +125,25 @@ async function addRole() {
     {
       type: "list",
       name: "department_id",
-      message: "choose a department",
+      message: "Choose a department",
       choices: choices,
     },
+    {
+      type: "input",
+      name: "title",
+      message: "What is the Job Title?",
+    },
+    {
+      type: "input",
+      name: "salary",
+      message: "What is the Jobs Salary?",
+    }
   ]);
+
+  await db.query("INSERT INTO roles (title, salary, department_id) VALUES (?,?,?)", [answers.title, answers.salary, answers.department_id])
+
+  presentOptions();
+
 }
 
 async function updateEmployeeRole() {}
