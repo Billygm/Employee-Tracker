@@ -1,4 +1,3 @@
-const mysql = require('mysql2');
 const inquirer = require('inquirer');
 const db = require('./db/connection');
 
@@ -86,7 +85,7 @@ async function addRole() {
     {
       type: 'list',
       name: 'department_id',
-      message: 'Choose a department',
+      message: 'Which Department does the Role belong to?',
       choices: choices,
     },
     {
@@ -123,7 +122,7 @@ async function addEmployee() {
 
   const supervisorChoices = employees.map((employees) => {
     return {
-      name: [employees.first_name, employees.last_name],
+      name: [employees.first_name+" "+employees.last_name],
       value: employees.id,
     };
   });
@@ -168,7 +167,7 @@ async function updateEmployeeRole() {
 
   const employee = employees.map((employees) => {
     return {
-      name: [employees.first_name, employees.last_name],
+      name: [employees.first_name+" "+employees.last_name],
       value: employees.id,
     };
   });
