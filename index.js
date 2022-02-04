@@ -121,9 +121,10 @@ async function addEmployee() {
       value: role.id,
     };
   });
+
   const supervisorChoices = employees.map((employees) => {
     return {
-      name: employees.name,
+      name: [employees.first_name, employees.last_name],
       value: employees.id,
     };
   });
@@ -161,6 +162,46 @@ async function addEmployee() {
   presentOptions();
 }
 
-async function updateEmployeeRole() {}
+async function updateEmployeeRole() {
+  const roles = await db.query("SELECT * FROM roles");
+
+  const employees = await db.query("SELECT * FROM employees");
+
+  const employee = employees.map((employees) => {
+    return {
+      name: [employees.first_name, employees.last_name],
+      value: employees.id,
+    };
+  });
+
+  const roleChoices = roles.map((role) => {
+    return {
+      name: role.title,
+      value: role.id,
+    };
+  });
+
+  const answers = await inquirer.prompt([
+    {
+      type: "list",
+      name: "employee",
+      message: "Who's role would you like to update?",
+      choices: employee,
+    },
+    {
+      type: "list",
+      name: "role_id",
+      message: "Choose a role",
+      choices: roleChoices,
+    },
+  ]);
+
+  await db.query(
+    "UPDATE employees SET role_id = (?) WHERE employees.id = (?)",
+    [answers.role_id, answers.employee]
+  );
+
+  presentOptions();
+}
 
 presentOptions();
