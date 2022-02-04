@@ -27,11 +27,3 @@ VALUES
   ('Shriekin', 'Professional', 5, 4),
   ('Tha', 'Destroyah', 7, 2),
   ('Annoyin', 'Dominator', 8, 1);
-
-
-
-
-
-
-
-  
