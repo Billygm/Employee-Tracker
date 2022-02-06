@@ -14,6 +14,7 @@ async function presentOptions() {
       "Add a role",
       "Add an employee",
       "Update an employee role",
+      "View total utilized budget of a department",
       "Quit",
     ],
   });
@@ -32,9 +33,11 @@ async function presentOptions() {
     addEmployee();
   } else if (answer.options === "Update an employee role") {
     updateEmployeeRole();
+  } else if (answer.options === "View total utilized budget of a department") {
+    utilizedDepartmentBudget();
   } else if (answer.options === "Quit") {
     process.exit();
-  } 
+  }
 }
 
 async function viewAllDepartments() {
@@ -203,6 +206,35 @@ async function updateEmployeeRole() {
     "UPDATE employees SET role_id = (?) WHERE employees.id = (?)",
     [answers.role_id, answers.employee]
   );
+
+  presentOptions();
+}
+
+async function utilizedDepartmentBudget() {
+  const departments = await db.query("SELECT * FROM departments");
+
+  const choices = departments.map((department) => {
+    return {
+      name: department.name,
+      value: department.id,
+    };
+  });
+
+  const answers = await inquirer.prompt([
+    {
+      type: "list",
+      name: "department_id",
+      message: "Which Department's budget would you like to view?",
+      choices: choices,
+    },
+  ]);
+
+  const totalBudget = await db.query(
+    "SELECT SUM(salary) AS 'Total utilized budget' FROM roles WHERE roles.department_id = (?)",
+    [answers.department_id]
+  );
+
+  console.table(totalBudget);
 
   presentOptions();
 }
