@@ -14,6 +14,7 @@ async function presentOptions() {
       "Add a role",
       "Add an employee",
       "Update an employee role",
+      "Quit",
     ],
   });
 
@@ -31,7 +32,9 @@ async function presentOptions() {
     addEmployee();
   } else if (answer.options === "Update an employee role") {
     updateEmployeeRole();
-  }
+  } else if (answer.options === "Quit") {
+    process.exit();
+  } 
 }
 
 async function viewAllDepartments() {
